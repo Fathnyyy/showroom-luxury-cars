@@ -1,57 +1,62 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard - Luxury Car Showroom')
+@section('title', 'Dashboard 2 - Luxury Car Showroom')
 
 @section('content')
-<div class="space-y-8">
+<div class="max-w-7xl mx-auto py-10 px-4 space-y-10">
+
     <!-- Header -->
-    <div class="gradient-bg rounded-2xl p-8 text-center">
-        <h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            Dashboard
+    <div class="rounded-xl p-8 text-center shadow bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-400">
+        <h1 class="text-3xl font-extrabold mb-2 text-white tracking-wide animate-fade-in">
+            <i class="fas fa-gauge-high mr-2"></i> Dashboard Overview
         </h1>
-        <p class="text-gray-300 text-lg">Welcome to your luxury car showroom dashboard</p>
+        <p class="text-white/80 text-base">All your luxury car showroom stats at a glance</p>
     </div>
 
     <!-- Statistik Ringkas -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div class="glass p-6 rounded-xl shadow text-center">
-            <div class="text-3xl font-bold text-blue-400">{{ $totalCars }}</div>
-            <div class="text-gray-300 mt-2">Total Cars</div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="bg-white border-l-4 border-blue-500 p-5 rounded-lg shadow text-center hover:scale-105 transition">
+            <div class="text-2xl mb-1 text-blue-500"><i class="fas fa-car"></i></div>
+            <div class="text-xl font-bold text-gray-800">{{ $totalCars }}</div>
+            <div class="text-xs text-gray-400">Total Cars</div>
         </div>
-        <div class="glass p-6 rounded-xl shadow text-center">
-            <div class="text-3xl font-bold text-green-400">{{ $availableCars }}</div>
-            <div class="text-gray-300 mt-2">Available</div>
+        <div class="bg-white border-l-4 border-green-500 p-5 rounded-lg shadow text-center hover:scale-105 transition">
+            <div class="text-2xl mb-1 text-green-500"><i class="fas fa-check-circle"></i></div>
+            <div class="text-xl font-bold text-gray-800">{{ $availableCars }}</div>
+            <div class="text-xs text-gray-400">Available</div>
         </div>
-        <div class="glass p-6 rounded-xl shadow text-center">
-            <div class="text-3xl font-bold text-yellow-400">{{ $reservedCars }}</div>
-            <div class="text-gray-300 mt-2">Reserved</div>
+        <div class="bg-white border-l-4 border-yellow-400 p-5 rounded-lg shadow text-center hover:scale-105 transition">
+            <div class="text-2xl mb-1 text-yellow-400"><i class="fas fa-clock"></i></div>
+            <div class="text-xl font-bold text-gray-800">{{ $reservedCars }}</div>
+            <div class="text-xs text-gray-400">Reserved</div>
         </div>
-        <div class="glass p-6 rounded-xl shadow text-center">
-            <div class="text-3xl font-bold text-pink-400">{{ $soldCars }}</div>
-            <div class="text-gray-300 mt-2">Sold</div>
+        <div class="bg-white border-l-4 border-pink-400 p-5 rounded-lg shadow text-center hover:scale-105 transition">
+            <div class="text-2xl mb-1 text-pink-400"><i class="fas fa-dollar-sign"></i></div>
+            <div class="text-xl font-bold text-gray-800">{{ $soldCars }}</div>
+            <div class="text-xs text-gray-400">Sold</div>
         </div>
     </div>
 
-    <!-- Grafik Status Mobil -->
-    <div class="glass p-6 rounded-xl shadow">
-        <h2 class="text-xl font-bold mb-4 text-white">Car Status Overview</h2>
-        <canvas id="carStatusChart" height="100"></canvas>
-    </div>
-
+    <!-- Grafik Status Mobil (Card kecil) -->
+    <!-- Car Status Overview (Card sedikit lebih besar) -->
+<div class="bg-white border border-gray-200 rounded-lg p-6 shadow flex flex-col items-center w-80 mx-auto">
+    <h2 class="text-base font-semibold text-gray-700 mb-4">Car Status Overview</h2>
+    <canvas id="carStatusChart" width="180" height="180" style="max-width:180px;max-height:180px;"></canvas>
+</div>
     <!-- Mobil Terbaru -->
-    <div class="glass p-6 rounded-xl shadow">
-        <h2 class="text-xl font-bold mb-4 text-white">Recent Cars</h2>
+    <div class="bg-white border border-gray-200 rounded-xl p-8 shadow">
+        <h2 class="text-lg font-semibold text-gray-800 mb-4">Recent Cars</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             @forelse($recentCars as $car)
-                <div class="bg-gray-800 rounded-lg shadow-lg p-4 flex flex-col items-center hover:scale-105 transition">
-                    <img src="{{ $car->image ? Storage::url($car->image) : 'https://via.placeholder.com/150' }}"
-                         class="w-32 h-24 object-cover rounded mb-3 border-2 border-blue-400 shadow">
-                    <div class="text-lg font-semibold text-white">{{ $car->brand }} {{ $car->model }}</div>
-                    <div class="text-gray-400 text-sm mb-1">{{ $car->year }}</div>
-                    <span class="px-2 py-1 rounded-full text-xs font-bold
-                        @if($car->status == 'available') bg-green-500/80 text-white
-                        @elseif($car->status == 'sold') bg-pink-500/80 text-white
-                        @else bg-yellow-400/80 text-gray-900 @endif">
+                <div class="bg-sky-50 border border-sky-200 rounded-lg shadow p-4 flex flex-col items-center hover:scale-105 transition">
+                    <img src="{{ $car->image ? Storage::url($car->image) : 'https://via.placeholder.com/120x80' }}"
+                         class="w-28 h-20 object-cover rounded mb-2 border-2 border-blue-400 shadow">
+                    <div class="font-semibold text-gray-800">{{ $car->brand }} {{ $car->model }}</div>
+                    <div class="text-xs text-gray-500 mb-1">{{ $car->year }}</div>
+                    <span class="text-xs px-2 py-0.5 rounded
+                        @if($car->status == 'available') bg-green-100 text-green-700
+                        @elseif($car->status == 'sold') bg-pink-100 text-pink-700
+                        @else bg-yellow-100 text-yellow-700 @endif">
                         {{ ucfirst($car->status) }}
                     </span>
                 </div>
@@ -60,10 +65,40 @@
             @endforelse
         </div>
     </div>
+
+    <!-- Aktivitas Terbaru -->
+    <div class="bg-white border border-gray-200 rounded-xl p-8 shadow">
+        <h2 class="text-lg font-semibold text-gray-800 mb-4">Recent Activities</h2>
+        <table class="w-full text-sm text-gray-700">
+            <thead>
+                <tr>
+                    <th class="py-2 px-2 text-left">Time</th>
+                    <th class="py-2 px-2 text-left">User</th>
+                    <th class="py-2 px-2 text-left">Activity</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($recentActivities as $activity)
+                    <tr class="border-t">
+                        <td class="py-2 px-2">{{ \Carbon\Carbon::parse($activity->created_at)->diffForHumans() }}</td>
+                        <td class="py-2 px-2">{{ $activity->user->name ?? '-' }}</td>
+                        <td class="py-2 px-2">{{ $activity->description }}</td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="3" class="py-2 px-2 text-center text-gray-400">No recent activities.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection
 
 @push('scripts')
+<!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Chart.js for chart -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const ctx = document.getElementById('carStatusChart').getContext('2d');
@@ -83,7 +118,7 @@
         },
         options: {
             plugins: {
-                legend: { labels: { color: '#fff', font: { size: 16 } } }
+                legend: { labels: { color: '#222', font: { size: 14 } } }
             }
         }
     });
