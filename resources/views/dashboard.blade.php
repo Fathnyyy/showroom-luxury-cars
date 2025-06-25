@@ -12,87 +12,86 @@
         </h1>
         <p class="text-white/80 text-base">All your luxury car showroom stats at a glance</p>
     </div>
-
     <!-- Statistik Ringkas -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-        <div class="bg-white border-l-4 border-blue-500 p-5 rounded-lg shadow text-center hover:scale-105 transition">
-            <div class="text-2xl mb-1 text-blue-500"><i class="fas fa-car"></i></div>
-            <div class="text-xl font-bold text-gray-800">{{ $totalCars }}</div>
-            <div class="text-xs text-gray-400">Total Cars</div>
-        </div>
-        <div class="bg-white border-l-4 border-green-500 p-5 rounded-lg shadow text-center hover:scale-105 transition">
-            <div class="text-2xl mb-1 text-green-500"><i class="fas fa-check-circle"></i></div>
-            <div class="text-xl font-bold text-gray-800">{{ $availableCars }}</div>
-            <div class="text-xs text-gray-400">Available</div>
-        </div>
-        <div class="bg-white border-l-4 border-yellow-400 p-5 rounded-lg shadow text-center hover:scale-105 transition">
-            <div class="text-2xl mb-1 text-yellow-400"><i class="fas fa-clock"></i></div>
-            <div class="text-xl font-bold text-gray-800">{{ $reservedCars }}</div>
-            <div class="text-xs text-gray-400">Reserved</div>
-        </div>
-        <div class="bg-white border-l-4 border-pink-400 p-5 rounded-lg shadow text-center hover:scale-105 transition">
-            <div class="text-2xl mb-1 text-pink-400"><i class="fas fa-dollar-sign"></i></div>
-            <div class="text-xl font-bold text-gray-800">{{ $soldCars }}</div>
-            <div class="text-xs text-gray-400">Sold</div>
-        </div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div class="bg-blue-100 border border-blue-300 p-5 rounded-lg shadow text-center hover:scale-105 transition">
+        <div class="text-2xl mb-1 text-blue-500"><i class="fas fa-car"></i></div>
+        <div class="text-xl font-bold text-gray-800">{{ $totalCars }}</div>
+        <div class="text-xs text-gray-500">Total Cars</div>
     </div>
+    <div class="bg-green-100 border border-green-300 p-5 rounded-lg shadow text-center hover:scale-105 transition">
+        <div class="text-2xl mb-1 text-green-500"><i class="fas fa-check-circle"></i></div>
+        <div class="text-xl font-bold text-gray-800">{{ $availableCars }}</div>
+        <div class="text-xs text-gray-500">Available</div>
+    </div>
+    <div class="bg-yellow-100 border border-yellow-300 p-5 rounded-lg shadow text-center hover:scale-105 transition">
+        <div class="text-2xl mb-1 text-yellow-500"><i class="fas fa-clock"></i></div>
+        <div class="text-xl font-bold text-gray-800">{{ $reservedCars }}</div>
+        <div class="text-xs text-gray-500">Reserved</div>
+    </div>
+    <div class="bg-pink-100 border border-pink-300 p-5 rounded-lg shadow text-center hover:scale-105 transition">
+        <div class="text-2xl mb-1 text-pink-500"><i class="fas fa-dollar-sign"></i></div>
+        <div class="text-xl font-bold text-gray-800">{{ $soldCars }}</div>
+        <div class="text-xs text-gray-500">Sold</div>
+    </div>
+</div>
 
-    <!-- Grafik Status Mobil (Card kecil) -->
-    <!-- Car Status Overview (Card sedikit lebih besar) -->
-<div class="bg-white border border-gray-200 rounded-lg p-6 shadow flex flex-col items-center w-80 mx-auto">
+<!-- Car Status Overview -->
+<div class="bg-purple-100 border border-purple-300 rounded-lg p-6 shadow flex flex-col items-center w-80 mx-auto my-10">
     <h2 class="text-base font-semibold text-gray-700 mb-4">Car Status Overview</h2>
     <canvas id="carStatusChart" width="180" height="180" style="max-width:180px;max-height:180px;"></canvas>
 </div>
-    <!-- Mobil Terbaru -->
-    <div class="bg-white border border-gray-200 rounded-xl p-8 shadow">
-        <h2 class="text-lg font-semibold text-gray-800 mb-4">Recent Cars</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            @forelse($recentCars as $car)
-                <div class="bg-sky-50 border border-sky-200 rounded-lg shadow p-4 flex flex-col items-center hover:scale-105 transition">
-                    <img src="{{ $car->image ? Storage::url($car->image) : 'https://via.placeholder.com/120x80' }}"
-                         class="w-28 h-20 object-cover rounded mb-2 border-2 border-blue-400 shadow">
-                    <div class="font-semibold text-gray-800">{{ $car->brand }} {{ $car->model }}</div>
-                    <div class="text-xs text-gray-500 mb-1">{{ $car->year }}</div>
-                    <span class="text-xs px-2 py-0.5 rounded
-                        @if($car->status == 'available') bg-green-100 text-green-700
-                        @elseif($car->status == 'sold') bg-pink-100 text-pink-700
-                        @else bg-yellow-100 text-yellow-700 @endif">
-                        {{ ucfirst($car->status) }}
-                    </span>
-                </div>
-            @empty
-                <div class="col-span-3 text-center text-gray-400">No recent cars.</div>
-            @endforelse
-        </div>
-    </div>
 
-    <!-- Aktivitas Terbaru -->
-    <div class="bg-white border border-gray-200 rounded-xl p-8 shadow">
-        <h2 class="text-lg font-semibold text-gray-800 mb-4">Recent Activities</h2>
-        <table class="w-full text-sm text-gray-700">
-            <thead>
-                <tr>
-                    <th class="py-2 px-2 text-left">Time</th>
-                    <th class="py-2 px-2 text-left">User</th>
-                    <th class="py-2 px-2 text-left">Activity</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($recentActivities as $activity)
-                    <tr class="border-t">
-                        <td class="py-2 px-2">{{ \Carbon\Carbon::parse($activity->created_at)->diffForHumans() }}</td>
-                        <td class="py-2 px-2">{{ $activity->user->name ?? '-' }}</td>
-                        <td class="py-2 px-2">{{ $activity->description }}</td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="3" class="py-2 px-2 text-center text-gray-400">No recent activities.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+<!-- Mobil Terbaru -->
+<div class="bg-sky-50 border border-sky-200 rounded-xl p-8 shadow">
+    <h2 class="text-lg font-semibold text-gray-800 mb-4">Recent Cars</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        @forelse($recentCars as $car)
+            <div class="bg-white border border-blue-100 rounded-lg shadow p-4 flex flex-col items-center hover:scale-105 transition">
+                <img src="{{ $car->image ? Storage::url($car->image) : 'https://via.placeholder.com/120x80' }}"
+                     class="w-28 h-20 object-cover rounded mb-2 border-2 border-blue-400 shadow">
+                <div class="font-semibold text-gray-800">{{ $car->brand }} {{ $car->model }}</div>
+                <div class="text-xs text-gray-500 mb-1">{{ $car->year }}</div>
+                <span class="text-xs px-2 py-0.5 rounded
+                    @if($car->status == 'available') bg-green-100 text-green-700
+                    @elseif($car->status == 'sold') bg-pink-100 text-pink-700
+                    @else bg-yellow-100 text-yellow-700 @endif">
+                    {{ ucfirst($car->status) }}
+                </span>
+            </div>
+        @empty
+            <div class="col-span-3 text-center text-gray-400">No recent cars.</div>
+        @endforelse
     </div>
 </div>
+
+<!-- Aktivitas Terbaru -->
+<div class="bg-gray-100 border border-gray-300 rounded-xl p-8 shadow">
+    <h2 class="text-lg font-semibold text-gray-800 mb-4">Recent Activities</h2>
+    <table class="w-full text-sm text-gray-700">
+        <thead>
+            <tr>
+                <th class="py-2 px-2 text-left">Time</th>
+                <th class="py-2 px-2 text-left">User</th>
+                <th class="py-2 px-2 text-left">Activity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($recentActivities as $activity)
+                <tr class="border-t">
+                    <td class="py-2 px-2">{{ \Carbon\Carbon::parse($activity->created_at)->diffForHumans() }}</td>
+                    <td class="py-2 px-2">{{ $activity->user->name ?? '-' }}</td>
+                    <td class="py-2 px-2">{{ $activity->description }}</td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="3" class="py-2 px-2 text-center text-gray-400">No recent activities.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+
 @endsection
 
 @push('scripts')
