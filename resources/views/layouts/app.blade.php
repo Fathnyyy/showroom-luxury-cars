@@ -102,7 +102,7 @@
                             </svg>
                         </div>
                         <span class="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                            Luxury Showroom
+                            Cars Showroom
                         </span>
                     </a>
                 </div>

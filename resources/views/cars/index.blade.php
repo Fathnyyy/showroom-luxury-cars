@@ -282,4 +282,35 @@
             }
         </script>
     @endpush
+
+    <style>
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse-slow {
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 1s ease-in-out;
+        }
+
+        .animate-pulse-slow {
+            animation: pulse-slow 2s infinite;
+        }
+    </style>
 @endsection
