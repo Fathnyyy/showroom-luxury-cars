@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Luxury Car Showroom')</title>
-    
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -32,62 +32,63 @@
             }
         }
     </script>
-    
+
     <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
+
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
     <style>
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         @keyframes slideUp {
             from { transform: translateY(20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
-        
+
         .glass {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
+
         .glass-dark {
             background: rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .gradient-bg {
             background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #374151 100%);
         }
-        
+
         .card-hover {
             transition: all 0.3s ease;
         }
-        
+
         .card-hover:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
         }
-        
+
         .skeleton {
             background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
             background-size: 200% 100%;
             animation: loading 1.5s infinite;
         }
-        
+
         @keyframes loading {
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
     </style>
-    
+
     @stack('styles')
+
 </head>
 <body class="bg-gray-900 text-gray-100 min-h-screen">
     <!-- Navigation -->
@@ -106,7 +107,7 @@
                         </span>
                     </a>
                 </div>
-                
+
                 <div class="flex items-center space-x-4">
                     <a href="{{ route('cars.index') }}" class="text-gray-300 hover:text-white transition-colors">
                         Cars
@@ -125,14 +126,14 @@
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         @if(session('success'))
-            <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)" 
+            <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
                  class="mb-6 bg-green-500 text-white p-4 rounded-lg shadow-lg animate-fade-in">
                 {{ session('success') }}
             </div>
         @endif
 
         @if(session('error'))
-            <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)" 
+            <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
                  class="mb-6 bg-red-500 text-white p-4 rounded-lg shadow-lg animate-fade-in">
                 {{ session('error') }}
             </div>
@@ -145,8 +146,8 @@
     <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
 
     <!-- Loading Overlay -->
-    <div x-data="{ loading: false }" 
-         x-show="loading" 
+    <div x-data="{ loading: false }"
+         x-show="loading"
          x-transition:enter="transition ease-out duration-300"
          x-transition:enter-start="opacity-0"
          x-transition:enter-end="opacity-100"
@@ -171,9 +172,9 @@
                 type === 'success' ? 'bg-green-500' : 'bg-red-500'
             } text-white`;
             toast.textContent = message;
-            
+
             container.appendChild(toast);
-            
+
             setTimeout(() => {
                 toast.remove();
             }, 3000);
@@ -183,8 +184,10 @@
         window.setLoading = function(loading) {
             Alpine.store('loading', loading);
         };
+           @stack('scripts')
+    
     </script>
 
     @stack('scripts')
 </body>
-</html> 
+</html>

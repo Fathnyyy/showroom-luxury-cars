@@ -12,36 +12,37 @@
         </h1>
         <p class="text-white/80 text-base">All your luxury car showroom stats at a glance</p>
     </div>
+   <!-- Statistik & Car Status Overview dalam 1 Card (tinggi sama) -->
+<div class="bg-white border border-gray-200 rounded-2xl shadow p-10 flex flex-col md:flex-row items-stretch justify-between gap-10 my-10 max-w-6xl mx-auto">
+    <!-- Car Status Overview (Ungu) -->
+    <div class="bg-purple-100 border border-purple-300 rounded-xl flex flex-col items-center justify-center p-8 shadow h-full min-h-[260px]">
+        <h2 class="text-base font-semibold text-purple-800 mb-4">Car Status</h2>
+        <canvas id="carStatusChart" width="180" height="180" style="max-width:180px;max-height:180px;"></canvas>
+    </div>
     <!-- Statistik Ringkas -->
-<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-    <div class="bg-blue-100 border border-blue-300 p-5 rounded-lg shadow text-center hover:scale-105 transition">
-        <div class="text-2xl mb-1 text-blue-500"><i class="fas fa-car"></i></div>
-        <div class="text-xl font-bold text-gray-800">{{ $totalCars }}</div>
-        <div class="text-xs text-gray-500">Total Cars</div>
-    </div>
-    <div class="bg-green-100 border border-green-300 p-5 rounded-lg shadow text-center hover:scale-105 transition">
-        <div class="text-2xl mb-1 text-green-500"><i class="fas fa-check-circle"></i></div>
-        <div class="text-xl font-bold text-gray-800">{{ $availableCars }}</div>
-        <div class="text-xs text-gray-500">Available</div>
-    </div>
-    <div class="bg-yellow-100 border border-yellow-300 p-5 rounded-lg shadow text-center hover:scale-105 transition">
-        <div class="text-2xl mb-1 text-yellow-500"><i class="fas fa-clock"></i></div>
-        <div class="text-xl font-bold text-gray-800">{{ $reservedCars }}</div>
-        <div class="text-xs text-gray-500">Reserved</div>
-    </div>
-    <div class="bg-pink-100 border border-pink-300 p-5 rounded-lg shadow text-center hover:scale-105 transition">
-        <div class="text-2xl mb-1 text-pink-500"><i class="fas fa-dollar-sign"></i></div>
-        <div class="text-xl font-bold text-gray-800">{{ $soldCars }}</div>
-        <div class="text-xs text-gray-500">Sold</div>
+    <div class="flex-1 grid grid-cols-2 md:grid-cols-4 gap-8 h-full">
+        <div class="bg-blue-100 border border-blue-300 p-8 rounded-lg shadow text-center flex flex-col justify-center h-full">
+            <div class="text-3xl mb-2 text-blue-500"><i class="fas fa-car"></i></div>
+            <div class="text-3xl font-bold text-gray-800">{{ $totalCars }}</div>
+            <div class="text-base text-gray-500">Total Cars</div>
+        </div>
+        <div class="bg-green-100 border border-green-300 p-8 rounded-lg shadow text-center flex flex-col justify-center h-full">
+            <div class="text-3xl mb-2 text-green-500"><i class="fas fa-check-circle"></i></div>
+            <div class="text-3xl font-bold text-gray-800">{{ $availableCars }}</div>
+            <div class="text-base text-gray-500">Available</div>
+        </div>
+        <div class="bg-yellow-100 border border-yellow-300 p-8 rounded-lg shadow text-center flex flex-col justify-center h-full">
+            <div class="text-3xl mb-2 text-yellow-500"><i class="fas fa-clock"></i></div>
+            <div class="text-3xl font-bold text-gray-800">{{ $reservedCars }}</div>
+            <div class="text-base text-gray-500">Reserved</div>
+        </div>
+        <div class="bg-pink-100 border border-pink-300 p-8 rounded-lg shadow text-center flex flex-col justify-center h-full">
+            <div class="text-3xl mb-2 text-pink-500"><i class="fas fa-dollar-sign"></i></div>
+            <div class="text-3xl font-bold text-gray-800">{{ $soldCars }}</div>
+            <div class="text-base text-gray-500">Sold</div>
+        </div>
     </div>
 </div>
-
-<!-- Car Status Overview -->
-<div class="bg-purple-100 border border-purple-300 rounded-lg p-6 shadow flex flex-col items-center w-80 mx-auto my-10">
-    <h2 class="text-base font-semibold text-gray-700 mb-4">Car Status Overview</h2>
-    <canvas id="carStatusChart" width="180" height="180" style="max-width:180px;max-height:180px;"></canvas>
-</div>
-
 <!-- Mobil Terbaru -->
 <div class="bg-sky-50 border border-sky-200 rounded-xl p-8 shadow">
     <h2 class="text-lg font-semibold text-gray-800 mb-4">Recent Cars</h2>
@@ -99,7 +100,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <!-- Chart.js for chart -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
+    <script>
     const ctx = document.getElementById('carStatusChart').getContext('2d');
     new Chart(ctx, {
         type: 'doughnut',
@@ -121,5 +122,6 @@
             }
         }
     });
+</script>
 </script>
 @endpush
